@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tez-Up POS | Obid Shashlik</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f274a">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       ASOSIY POS TOPBAR (Yuqori Navigatsiya)
+       ========================================================================= -->
+  <header class="pos-header">
+    <div class="brand-section">
+      <div class="brand-logo-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>
+          <span>Tez-Up POS</span>
+          <span class="pos-tag">v2.5 Pro</span>
+        </h1>
+        <div class="brand-info">
+          <span class="dot"></span>
+          <strong id="headerRestaurantName">Obid Shashlik</strong>
+          <span>•</span>
+          <span>Kassir: <strong id="headerCashierName">Shavkat Aliyev</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Markaziy Statistikalar -->
+    <div class="header-stats">
+      <div class="stat-pill online-badge" id="networkStatusBadge" onclick="app.toggleNetworkSimulation()" title="Tarmoq holati (Bosing: Online / Offline)">
+        <span class="status-dot-pulse" id="networkStatusDot" style="background-color: var(--emerald-500); box-shadow: 0 0 6px var(--emerald-500);"></span>
+        <span id="networkStatusText">Online</span>
+      </div>
+      <div class="stat-pill all">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Jami: <strong id="statTotalTables">20</strong></span>
+      </div>
+      <div class="stat-pill free">
+        <span class="status-dot-pulse"></span>
+        <span>Bo'sh: <strong id="statFreeTables">16</strong></span>
+      </div>
+      <div class="stat-pill occupied">
+        <span>Band: <strong id="statOccupiedTables">4</strong></span>
+      </div>
+      <div class="stat-pill revenue">
+        <span>Kunlik: <strong id="statDailyRevenue">2 845 000 UZS</strong></span>
+      </div>
+    </div>
+
+    <!-- O'ng tomondagi amallar -->
+    <div class="header-actions">
+      <button class="btn-header active-orders" id="btnOpenActiveOrders">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Faol buyurtmalar</span>
+        <span class="badge-counter" id="activeOrdersBadge">4</span>
+      </button>
+
+      <button class="btn-header takeaway" id="btnOpenTakeaway">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>Olib ketish</span>
+      </button>
+
+      <button class="icon-btn-header" id="btnOpenReceiptsHistory" title="Cheklar tarixi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+      </button>
+
+      <button class="icon-btn-header" id="btnOpenShiftModal" title="Smena boshqaruvi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </button>
+
+      <button class="icon-btn-header" id="btnOpenSettings" title="Sozlamalar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+
+      <button class="icon-btn-header" id="btnLockApp" title="Tizimni qulflash (PIN kod)" onclick="app.lockScreen()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       ASOSIY POS TANASI (Ko'rinishlar almashinuvi)
+       ========================================================================= -->
+  <main class="pos-body">
+    
+    <!-- 1. STOLLAR EKRANI (Tables View) -->
+    <section class="main-view-container" id="tablesView">
+      <!-- Zonalar va Qidiruv tasmachasi -->
+      <div class="sub-header-bar">
+        <div class="zones-pills-list" id="zonesList">
+          <!-- Dinamik ravishda render qilinadi -->
+        </div>
+
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" id="tableSearchInput" placeholder="Qidiruv: stol raqami, xona, ofitsiant...">
+        </div>
+      </div>
+
+      <!-- Zamonaviy Stollar Gridi -->
+      <div class="tables-scroll-area">
+        <div class="tables-grid" id="tablesGridContainer">
+          <!-- Dinamik zamonaviy stol kartochkalari -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. O'NG TOMONDAGI STATIK/YON PANEL (Stollar rejimida: Buyurtmalar/Olib ketish) -->
+    <aside class="right-sidebar-panel" id="tableScreenSidebar">
+      <div class="right-sidebar-header">
+        <h2>Buyurtmalar</h2>
+        <div class="sidebar-tab-pills">
+          <button class="sidebar-tab-btn active" id="tabTakeawayBtn" onclick="app.switchSidebarTab('takeaway')">Olib ketish</button>
+          <button class="sidebar-tab-btn" id="tabDeliveryBtn" onclick="app.switchSidebarTab('delivery')">Dastavka</button>
+        </div>
+      </div>
+
+      <div class="right-sidebar-content" id="sidebarOrdersContent">
+        <!-- Bo'sh holat yoki ro'yxat -->
+      </div>
+    </aside>
+
+    <!-- 3. TAOMLAR MENYUSI EKRANI (Menu Order View - Dastlab yashiringan) -->
+    <section class="menu-view-container" id="menuView" style="display: none;">
+      <div class="menu-catalog-area">
+        <!-- Menyu boshqaruvi -->
+        <div class="menu-top-toolbar">
+          <button class="back-to-tables-btn" id="btnBackToTables">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <span>Stollarga qaytish</span>
+          </button>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-weight: 700; color: var(--blue-900); font-size: 1.05rem;" id="menuActiveTableTitle">2-stol (Ko'cha)</span>
+            <span style="font-size: 0.8rem; background: var(--blue-50); color: var(--blue-700); padding: 4px 10px; border-radius: 9999px; font-weight: 600;" id="menuActiveOrderNumber">Buyurtma #1008</span>
+          </div>
+
+          <div class="search-input-wrapper" style="min-width: 260px;">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" id="dishSearchInput" placeholder="Taom yoki ichimlik qidirish...">
+          </div>
+        </div>
+
+        <!-- Kategoriyalar filtri -->
+        <div class="category-filters-bar" id="categoryFiltersBar">
+          <!-- Kategoriyalar dinamik chiqadi -->
+        </div>
+
+        <!-- Bir xil o'lchamdagi mukammal taom rasmlari gridi -->
+        <div class="dishes-grid-scroll">
+          <div class="dishes-cards-grid" id="dishesGridContainer">
+            <!-- Dinamik taom kartochkalari -->
+          </div>
+        </div>
+      </div>
+
+      <!-- O'ng tomondagi buyurtma savatchasi -->
+      <aside class="order-cart-sidebar">
+        <div class="cart-header-box">
+          <div class="cart-header-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-table-badge" id="cartTableName">2-stol</span>
+            <span style="font-size: 0.82rem; opacity: 0.85;" id="cartOrderIdBadge">#1008</span>
+          </div>
+          <button class="icon-btn-header" style="width: 32px; height: 32px;" onclick="app.clearCurrentCart()" title="Savatni tozalash">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+
+        <!-- Savatdagi elementlar ro'yxati -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Dinamik elementlar -->
+        </div>
+
+        <!-- Hisob-kitob summasi bloki -->
+        <div class="cart-summary-block">
+          <div class="summary-row">
+            <span>Oraliq summa:</span>
+            <strong id="cartSubtotalText">0 UZS</strong>
+          </div>
+          <div class="summary-row">
+            <span>Xizmat haqi (<span id="cartServicePercent">10</span>%):</span>
+            <strong id="cartServiceFeeText">0 UZS</strong>
+          </div>
+          <div class="summary-row total-row">
+            <span>JAMI:</span>
+            <span class="total-amount-highlight" id="cartGrandTotalText">0 UZS</span>
+          </div>
+
+          <!-- Amallar tugmalari -->
+          <div class="cart-actions-grid">
+            <button class="btn-cart-action btn-kot" onclick="app.sendToKitchenKOT()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
+              <span>Oshxona (KOT)</span>
+            </button>
+            <button class="btn-cart-action btn-save-order" onclick="app.saveCartTemporarily()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              <span>Saqlash</span>
+            </button>
+            <button class="btn-cart-action btn-pay-order" onclick="app.openPaymentModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>To'lov qilish</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODAL: TO'LOVNI QABUL QILISH (Payment Modal with Numpad)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop" id="paymentModalBackdrop" style="display: none;">
+    <div class="pos-modal-card">
+      <div class="modal-header-bar">
+        <div>
+          <h3>To'lovni qabul qilish</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="payModalTableSubtitle">Stol: 2-stol</span>
+        </div>
+        <button class="modal-close-btn" onclick="app.closePaymentModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="payment-modal-grid">
+        <!-- Chap: To'lov usullari va Hisob -->
+        <div>
+          <div class="payment-methods-tabs">
+            <button class="pay-method-btn active" data-method="naqd" onclick="app.setPaymentMethod('naqd')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+              <span>Naqd</span>
+            </button>
+            <button class="pay-method-btn" data-method="plastik" onclick="app.setPaymentMethod('plastik')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Plastik</span>
+            </button>
+            <button class="pay-method-btn" data-method="qr" onclick="app.setPaymentMethod('qr')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>QR Kod</span>
+            </button>
+          </div>
+
+          <div class="pay-calculation-card">
+            <div class="pay-calc-row to-pay">
+              <span class="label">To'lanishi kerak:</span>
+              <span class="val" id="payModalToPayText">0 UZS</span>
+            </div>
+            <div class="pay-calc-row received">
+              <span class="label">Qabul qilindi:</span>
+              <span class="val" id="payModalReceivedText">0 UZS</span>
+            </div>
+            <div class="pay-calc-row change">
+              <span class="label">Qaytim:</span>
+              <span class="val" id="payModalChangeText">0 UZS</span>
+            </div>
+          </div>
+
+          <button class="quick-cash-btn" style="width: 100%; margin-top: 12px; padding: 10px;" onclick="app.setExactPaymentAmount()">
+            ⚡ Aniq summa (Qaytimsiz)
+          </button>
+        </div>
+
+        <!-- O'ng: Numpad klaviatura -->
+        <div class="numpad-container">
+          <div class="numpad-display-box" id="numpadDisplay">0</div>
+
+          <div class="numpad-keys-grid">
+            <button class="num-key-btn" onclick="app.handleNumpadInput('1')">1</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('2')">2</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('3')">3</button>
+
+            <button class="num-key-btn" onclick="app.handleNumpadInput('4')">4</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('5')">5</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('6')">6</button>
+
+            <button class="num-key-btn" onclick="app.handleNumpadInput('7')">7</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('8')">8</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('9')">9</button>
+
+            <button class="num-key-btn" onclick="app.handleNumpadInput('00')">00</button>
+            <button class="num-key-btn" onclick="app.handleNumpadInput('0')">0</button>
+            <button class="num-key-btn backspace" onclick="app.handleNumpadBackspace()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+            </button>
+          </div>
+
+          <div class="quick-cash-row">
+            <button class="quick-cash-btn" onclick="app.addQuickCash(50000)">+50 000</button>
+            <button class="quick-cash-btn" onclick="app.addQuickCash(100000)">+100 000</button>
+            <button class="quick-cash-btn" onclick="app.addQuickCash(200000)">+200 000</button>
+          </div>
+        </div>
+
+        <!-- Yakunlash tugmasi -->
+        <button class="submit-payment-full-btn" onclick="app.finalizePaymentAndPrint()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>To'lovni yakunlash va chek chop etish</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: CHEKLAR TARIXI (Receipts History & Preview)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop" id="receiptsModalBackdrop" style="display: none;">
+    <div class="pos-modal-card large">
+      <div class="modal-header-bar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <h3>Cheklar tarixi</h3>
+          <span style="font-size: 0.85rem; background: var(--blue-50); color: var(--blue-700); padding: 3px 10px; border-radius: 9999px; font-weight: 700;" id="receiptsCountBadge">3 ta chek</span>
+        </div>
+        <button class="modal-close-btn" onclick="app.closeReceiptsModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="receipts-view-layout">
+        <!-- Chap: Ro'yxat -->
+        <div class="receipts-sidebar-list">
+          <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-light);">
+            <input type="text" class="search-input" id="receiptSearchInput" placeholder="Chek #, stol yoki sana qidirish..." onkeyup="app.filterReceiptsList()">
+          </div>
+          <div style="flex: 1; overflow-y: auto;" id="receiptsItemsContainer">
+            <!-- Dinamik cheklar -->
+          </div>
+        </div>
+
+        <!-- O'ng: Chek Ko'rinishi va Chop Etish -->
+        <div class="receipt-preview-stage">
+          <div id="receiptPreviewContainer">
+            <!-- 80mm Termal Chek render qilinadi -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: FAOL BUYURTMALAR (Active Orders KOT Monitor)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop" id="activeOrdersModalBackdrop" style="display: none;">
+    <div class="pos-modal-card" style="max-width: 720px; max-height: 85vh;">
+      <div class="modal-header-bar">
+        <h3>Mavjud faol buyurtmalar</h3>
+        <button class="modal-close-btn" onclick="app.closeActiveOrdersModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div style="padding: 16px; overflow-y: auto; max-height: 70vh;" id="activeOrdersListContainer">
+        <!-- Dinamik faol buyurtmalar -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: SMENA BOSHQARUVI (Shift Management)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop" id="shiftModalBackdrop" style="display: none;">
+    <div class="pos-modal-card" style="max-width: 520px;">
+      <div class="modal-header-bar">
+        <h3>Smena Boshqaruvi</h3>
+        <button class="modal-close-btn" onclick="app.closeShiftModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div style="padding: 24px;" id="shiftModalContent">
+        <!-- Smena statistikasi -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: SOZLAMALAR (Settings: Tables, Menu, Printer, Taxes)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop" id="settingsModalBackdrop" style="display: none;">
+    <div class="pos-modal-card large">
+      <div class="modal-header-bar">
+        <h3>Tizim Sozlamalari</h3>
+        <button class="modal-close-btn" onclick="app.closeSettingsModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div style="padding: 20px; overflow-y: auto;" id="settingsModalContent">
+        <!-- Dinamik sozlamalar paneli -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast bildirishnomalari konteyneri -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- =========================================================================
+       MODAL: QULFLASH VA PIN KOD (Security PIN / Password Lock Screen)
+       ========================================================================= -->
+  <div class="pos-modal-backdrop lock-screen-backdrop" id="lockScreenModal" style="display: none;">
+    <div class="lock-screen-card">
+      <div class="lock-brand">
+        <div class="brand-logo-badge" style="width: 52px; height: 52px; margin: 0 auto 10px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h2 style="font-weight: 800; color: #fff; font-size: 1.35rem; margin-bottom: 2px;">Tez-Up POS</h2>
+        <p style="color: var(--blue-200); font-size: 0.85rem;" id="lockRestaurantName">Obid Shashlik • Kassa tizimi</p>
+      </div>
+
+      <!-- Kassir / Foydalanuvchi tanlash -->
+      <div class="lock-users-list" id="lockUsersList"></div>
+
+      <!-- 4-talik PIN ko'rsatkich nuqtalari -->
+      <div class="pin-dots-display" id="pinDotsDisplay">
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+      </div>
+
+      <div id="pinErrorMessage" style="color: #f87171; font-size: 0.82rem; min-height: 20px; text-align: center; font-weight: 600;"></div>
+
+      <!-- Numpad klaviatura -->
+      <div class="lock-numpad-grid">
+        <button class="lock-num-btn" onclick="app.enterPinDigit('1')">1</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('2')">2</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('3')">3</button>
+
+        <button class="lock-num-btn" onclick="app.enterPinDigit('4')">4</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('5')">5</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('6')">6</button>
+
+        <button class="lock-num-btn" onclick="app.enterPinDigit('7')">7</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('8')">8</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('9')">9</button>
+
+        <button class="lock-num-btn clear" onclick="app.clearPinDigits()">C</button>
+        <button class="lock-num-btn" onclick="app.enterPinDigit('0')">0</button>
+        <button class="lock-num-btn backspace" onclick="app.backspacePinDigit()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-top: 14px; color: var(--blue-200); font-size: 0.78rem;">
+        💡 Standart PIN: <strong>1234</strong> (Admin: <strong>7777</strong>)
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1768 @@
+/* ==========================================================================
+   Tez-Up POS - Professional Modern Blue POS Theme
+   Muallif: Google Antigravity & DeepMind UX
+   Ranglar: Premium Royal Blue / Azure / Slate / Emerald
+   ========================================================================== */
+
+:root {
+  /* Asosiy ko'k ranglar palitrasi */
+  --blue-950: #0a192f;
+  --blue-900: #0f274a;
+  --blue-850: #133363;
+  --blue-800: #1e3a8a;
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-300: #93c5fd;
+  --blue-200: #bfdbfe;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+
+  /* Neytral va Fon ranglari */
+  --bg-main: #f0f4f9;
+  --bg-card: #ffffff;
+  --bg-subtle: #f8fafc;
+  --border-light: #e2e8f0;
+  --border-focus: #3b82f6;
+  --border-active: #2563eb;
+
+  /* Matn ranglari */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --text-white: #ffffff;
+
+  /* Holat ranglari */
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-50:  #ecfdf5;
+  
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-50:  #fffbeb;
+
+  --rose-500: #ef4444;
+  --rose-600: #dc2626;
+  --rose-50:  #fef2f2;
+
+  --purple-500: #8b5cf6;
+  --purple-50:  #f5f3ff;
+
+  /* Soyalar */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 39, 74, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 39, 74, 0.07), 0 2px 4px -2px rgba(15, 39, 74, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 39, 74, 0.08), 0 4px 6px -4px rgba(15, 39, 74, 0.05);
+  --shadow-blue: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
+  --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.35);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Fontlar */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Reset & Asosiy elementlar */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   HEADER / TOPBAR (Yuqori navigatsiya)
+   ========================================================================== */
+.pos-header {
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+  color: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo-badge {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #38bdf8 0%, var(--blue-600) 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
+  color: white;
+}
+
+.brand-text h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-text .pos-tag {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  text-transform: uppercase;
+}
+
+.brand-info {
+  font-size: 0.8rem;
+  color: var(--blue-200);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-info .dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--emerald-500);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px var(--emerald-500);
+}
+
+/* Stats ko'rsatkichlari */
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 8px;
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.stat-pill.all {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.stat-pill.free {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.stat-pill.occupied {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.stat-pill.revenue {
+  background: rgba(56, 189, 248, 0.18);
+  color: #bae6fd;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+/* Header tugmalari */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+  position: relative;
+}
+
+.btn-header.active-orders {
+  background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-header.active-orders:hover {
+  background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%);
+  transform: translateY(-1px);
+}
+
+.btn-header.takeaway {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-header.takeaway:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.badge-counter {
+  background: #f43f5e;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  margin-left: 2px;
+  box-shadow: 0 2px 6px rgba(244, 63, 94, 0.4);
+}
+
+.icon-btn-header {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--blue-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn-header:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.icon-btn-header.active {
+  background: var(--blue-600);
+  color: #ffffff;
+  border-color: var(--blue-400);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+
+/* ==========================================================================
+   ASOSIY KONTENT MAYDONI
+   ========================================================================== */
+.pos-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Chap/Asosiy panel */
+.main-view-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-main);
+}
+
+/* ==========================================================================
+   SUB-NAV / ZONALAR VA QIDIRUV (Stollar ekrani)
+   ========================================================================== */
+.sub-header-bar {
+  background: #ffffff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  gap: 16px;
+}
+
+.zones-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.zone-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.zone-pill-btn:hover {
+  border-color: var(--blue-400);
+  color: var(--blue-600);
+  background: var(--blue-50);
+}
+
+.zone-pill-btn.active {
+  background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
+  color: #ffffff;
+  border-color: var(--blue-700);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.search-input-wrapper {
+  position: relative;
+  min-width: 320px;
+  max-width: 420px;
+  flex: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 16px 9px 42px;
+  font-size: 0.88rem;
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-full);
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  background: #ffffff;
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ==========================================================================
+   STOLLAR GRIDI VA ZAMONAVIY STOL DIZAYNI (Stunning Modern Design)
+   ========================================================================== */
+.tables-scroll-area {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Zamonaviy Stol Kartochkasi */
+.modern-table-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-table-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue-300);
+}
+
+/* Holat bo'yicha uslublar */
+.modern-table-card.empty {
+  border-color: #e2e8f0;
+}
+
+.modern-table-card.empty:hover {
+  border-color: var(--blue-500);
+  background: linear-gradient(180deg, #ffffff 0%, var(--blue-50) 100%);
+}
+
+.modern-table-card.occupied {
+  border-color: var(--blue-500);
+  background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+.modern-table-card.ready {
+  border-color: var(--amber-500);
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf5 100%);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.15);
+}
+
+.modern-table-card.billed {
+  border-color: var(--purple-500);
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.15);
+}
+
+.modern-table-card.reserved {
+  border: 2px dashed #94a3b8;
+  background: #f8fafc;
+}
+
+/* Stol kartochkasi bosh qismi */
+.table-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.table-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-number-badge {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--blue-900);
+  letter-spacing: -0.02em;
+}
+
+.table-zone-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.table-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.status-empty {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--emerald-600);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-occupied {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--blue-700);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.status-ready {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-600);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-billed {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--purple-500);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.status-reserved {
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.status-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.2); }
+}
+
+/* ==========================================================================
+   STOLNING REAL RASMI VA ZAMONAVIY KARTASI (Real Table Photo & Visual)
+   ========================================================================== */
+.table-photo-stage {
+  height: 155px; /* Bir xil qat'iy balandlik */
+  width: 100%;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 12px;
+  background-color: var(--blue-900);
+}
+
+.table-real-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-table-card:hover .table-real-img {
+  transform: scale(1.08);
+}
+
+/* Gradient qora qoplama (overlay) - matnlar va nishonlar aniq ko'rinishi uchun */
+.table-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg, 
+    rgba(15, 23, 42, 0.65) 0%, 
+    rgba(15, 23, 42, 0.1) 40%, 
+    rgba(15, 23, 42, 0.75) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.table-photo-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-photo-center-badge {
+  align-self: center;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.modern-table-card:hover .table-photo-center-badge {
+  transform: scale(1.05);
+}
+
+.table-photo-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.table-photo-tag-pill {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Stol kartochkasi pastki qismi (Tafsilotlar) */
+.table-card-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.table-waiter-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.table-time-elapsed {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--blue-600);
+  font-weight: 600;
+  background: var(--blue-50);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   O'NG PANEL: BUYURTMALAR / OLIB KETISH / DASTAVKA
+   ========================================================================== */
+.right-sidebar-panel {
+  width: 360px;
+  background: #ffffff;
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(15, 23, 42, 0.04);
+  z-index: 20;
+}
+
+.right-sidebar-header {
+  background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-900) 100%);
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right-sidebar-header h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-tab-pills {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px;
+  border-radius: var(--radius-full);
+}
+
+.sidebar-tab-btn {
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue-200);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-tab-btn.active {
+  background: #ffffff;
+  color: var(--blue-900);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.right-sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* Bo'sh holat (Empty state) */
+.empty-state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+  text-align: center;
+  color: var(--text-light);
+  gap: 12px;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--blue-50);
+  color: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   TAOMLAR MENYUSI EKRANI (Menu & Order Mode)
+   "rasmlar bir xil bo'lish" qoidasi bo'yicha mukammal kartochkalar
+   ========================================================================== */
+.menu-view-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.menu-catalog-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-main);
+}
+
+.menu-top-toolbar {
+  background: #ffffff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  gap: 16px;
+}
+
+.back-to-tables-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue-700);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-to-tables-btn:hover {
+  background: var(--blue-100);
+  color: var(--blue-800);
+}
+
+/* Kategoriyalar gorizontal tasmasi */
+.category-filters-bar {
+  background: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.cat-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cat-filter-btn:hover {
+  border-color: var(--blue-400);
+  color: var(--blue-600);
+}
+
+.cat-filter-btn.active {
+  background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
+  color: #ffffff;
+  border-color: var(--blue-700);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Taomlar Gridi: 100% bir xil o'lchamli rasmlar */
+.dishes-grid-scroll {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.dishes-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+/* Yagona va Bir Xil Taom Kartochkasi */
+.dish-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  cursor: pointer;
+}
+
+.dish-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-300);
+}
+
+/* Bir xil proporsiyadagi rasm maydoni */
+.dish-image-wrapper {
+  width: 100%;
+  height: 130px; /* Bir xil qat'iy balandlik */
+  position: relative;
+  overflow: hidden;
+  background-color: var(--blue-50);
+}
+
+.dish-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Har doim bir xil va tekis qirqilgan */
+  transition: transform 0.4s ease;
+}
+
+.dish-card:hover .dish-image {
+  transform: scale(1.08);
+}
+
+.dish-station-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dish-station-badge.grill { background: rgba(225, 29, 72, 0.85); }
+.dish-station-badge.kitchen { background: rgba(37, 99, 235, 0.85); }
+.dish-station-badge.bar { background: rgba(13, 148, 136, 0.85); }
+
+/* Taom matnlari */
+.dish-card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dish-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dish-weight-time {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dish-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+
+.dish-price-text {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-700);
+}
+
+.dish-add-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  color: var(--blue-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dish-card:hover .dish-add-btn {
+  background: var(--blue-600);
+  color: #ffffff;
+  border-color: var(--blue-600);
+}
+
+/* ==========================================================================
+   BUYURTMA SAVATCHASI (Cart sidebar on right)
+   ========================================================================== */
+.order-cart-sidebar {
+  width: 380px;
+  background: #ffffff;
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(15, 23, 42, 0.05);
+  z-index: 25;
+}
+
+.cart-header-box {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-table-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.cart-items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-item-row {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.cart-item-row:hover {
+  border-color: var(--blue-300);
+  background: #ffffff;
+}
+
+.cart-item-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-item-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cart-item-price-unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.stepper-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.step-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--blue-700);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: background 0.15s ease;
+}
+
+.step-btn:hover {
+  background: var(--blue-50);
+}
+
+.step-qty {
+  width: 32px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cart-item-total {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue-700);
+}
+
+.cart-item-remove-btn {
+  color: var(--text-light);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.cart-item-remove-btn:hover {
+  color: var(--rose-500);
+  background: var(--rose-50);
+}
+
+/* Savatcha hisob-kitob bloki */
+.cart-summary-block {
+  background: #ffffff;
+  border-top: 1px solid var(--border-light);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.summary-row.total-row {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  padding-top: 8px;
+  border-top: 1.5px dashed var(--border-light);
+  margin-top: 4px;
+}
+
+.total-amount-highlight {
+  color: var(--blue-700);
+}
+
+/* Savat amallari tugmalari */
+.cart-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-cart-action {
+  padding: 11px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-kot {
+  background: var(--blue-50);
+  color: var(--blue-700);
+  border: 1.5px solid var(--blue-200);
+}
+
+.btn-kot:hover {
+  background: var(--blue-100);
+}
+
+.btn-save-order {
+  background: #f8fafc;
+  color: var(--text-main);
+  border: 1.5px solid var(--border-light);
+}
+
+.btn-save-order:hover {
+  background: #e2e8f0;
+}
+
+.btn-pay-order {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--emerald-600) 0%, #047857 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  font-size: 0.95rem;
+  padding: 13px;
+}
+
+.btn-pay-order:hover {
+  background: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   MODAL OYNALAR (To'lov, Cheklar tarixi, KOT, Sozlamalar)
+   ========================================================================== */
+.pos-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pos-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 25px 50px -12px rgba(15, 39, 74, 0.25);
+  width: 100%;
+  max-width: 640px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pos-modal-card.large {
+  max-width: 900px;
+  height: 85vh;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-header-bar {
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header-bar h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--blue-900);
+}
+
+.modal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: var(--rose-50);
+  color: var(--rose-600);
+}
+
+/* ==========================================================================
+   TO'LOV MODALI VA RAQAMLAR PANEL (Keypad & Payment options)
+   ========================================================================== */
+.payment-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 24px;
+}
+
+.payment-methods-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.pay-method-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-light);
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.pay-method-btn.active {
+  border-color: var(--blue-600);
+  background: var(--blue-50);
+  color: var(--blue-700);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+}
+
+.pay-calculation-card {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pay-calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.pay-calc-row .label { color: var(--text-muted); }
+.pay-calc-row .val { font-weight: 800; }
+.pay-calc-row.to-pay .val { color: var(--blue-700); font-size: 1.1rem; }
+.pay-calc-row.received .val { color: var(--emerald-600); font-size: 1.1rem; }
+.pay-calc-row.change .val { color: var(--text-main); font-size: 1.1rem; }
+
+/* Numpad klaviaturasi */
+.numpad-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.numpad-display-box {
+  background: #ffffff;
+  border: 2px solid var(--blue-600);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  text-align: right;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--blue-900);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.numpad-keys-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.num-key-btn {
+  height: 52px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.num-key-btn:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-300);
+  color: var(--blue-700);
+}
+
+.num-key-btn.backspace {
+  background: var(--rose-50);
+  border-color: #fecdd3;
+  color: var(--rose-600);
+}
+
+.num-key-btn.backspace:hover {
+  background: #ffe4e6;
+}
+
+/* Tezkor pullar */
+.quick-cash-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quick-cash-btn {
+  padding: 8px 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--blue-50);
+  border: 1px solid var(--blue-200);
+  color: var(--blue-700);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quick-cash-btn:hover {
+  background: var(--blue-600);
+  color: #ffffff;
+}
+
+.submit-payment-full-btn {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--emerald-600) 0%, #047857 100%);
+  color: #ffffff;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all 0.2s ease;
+}
+
+.submit-payment-full-btn:hover {
+  background: linear-gradient(135deg, var(--emerald-500) 0%, var(--emerald-600) 100%);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   CHEKLAR TARIXI VA CHOP ETISH SLIP DIZAYNI
+   ========================================================================== */
+.receipts-view-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.receipts-sidebar-list {
+  width: 400px;
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.receipt-item-card {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s ease;
+}
+
+.receipt-item-card:hover {
+  background: var(--blue-50);
+}
+
+.receipt-item-card.active {
+  background: var(--blue-50);
+  border-left: 4px solid var(--blue-600);
+}
+
+.receipt-preview-stage {
+  flex: 1;
+  background: var(--bg-main);
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Haqiqiy 80mm Termal Chek Ko'rinishi */
+.thermal-receipt-paper {
+  width: 320px;
+  background: #ffffff;
+  box-shadow: var(--shadow-lg);
+  padding: 24px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.82rem;
+  color: #1e293b;
+  border-radius: 4px;
+  border-top: 5px dashed #cbd5e1;
+  border-bottom: 5px dashed #cbd5e1;
+}
+
+.receipt-header {
+  text-align: center;
+  margin-bottom: 14px;
+  border-bottom: 1px dashed #94a3b8;
+  padding-bottom: 12px;
+}
+
+.receipt-header h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.receipt-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.receipt-items-table th {
+  border-bottom: 1px dashed #94a3b8;
+  padding: 4px 0;
+  text-align: left;
+}
+
+.receipt-items-table td {
+  padding: 4px 0;
+}
+
+.receipt-total-section {
+  border-top: 1px dashed #94a3b8;
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.receipt-footer-text {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   TOAST BILDIRISHNOMALARI
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.pos-toast {
+  background: var(--blue-900);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pos-toast.success {
+  background: var(--emerald-600);
+}
+
+@keyframes toastSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   ONLINE / OFFLINE TARMOQ HOLATI NISHONI
+   ========================================================================== */
+.stat-pill.online-badge {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.stat-pill.offline-badge {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   QULFLASH VA PIN KOD EKRANI (Security PIN Lock Screen)
+   ========================================================================== */
+.lock-screen-backdrop {
+  background: rgba(10, 25, 47, 0.92);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+}
+
+.lock-screen-card {
+  background: linear-gradient(145deg, var(--blue-900) 0%, var(--blue-950) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6);
+  border-radius: var(--radius-2xl);
+  width: 100%;
+  max-width: 420px;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lock-brand {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lock-users-list {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.lock-user-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: var(--blue-200);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.lock-user-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.lock-user-chip.active {
+  background: var(--blue-600);
+  border-color: var(--blue-400);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.lock-user-chip .avatar {
+  font-size: 1.3rem;
+}
+
+/* PIN nuqtalari */
+.pin-dots-display {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.pin-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--blue-400);
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pin-dot.filled {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+  transform: scale(1.15);
+}
+
+.shake-animation {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* Numpad klaviaturasi */
+.lock-numpad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.lock-num-btn {
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.lock-num-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.04);
+}
+
+.lock-num-btn:active {
+  transform: scale(0.96);
+  background: var(--blue-600);
+}
+
+.lock-num-btn.clear {
+  color: #fbbf24;
+  font-size: 1.15rem;
+}
+
+.lock-num-btn.backspace {
+  color: #f87171;
+}
+
+/* ==========================================================================
+   PRINT STYLES (@media print)
+   ========================================================================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .thermal-receipt-paper, .thermal-receipt-paper * {
+    visibility: visible;
+  }
+  .thermal-receipt-paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
