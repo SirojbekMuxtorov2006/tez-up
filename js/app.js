@@ -316,6 +316,14 @@ class PosApp {
     }
   }
 
+  quickUnlock() {
+    this.enteredPin = '1234';
+    this.selectedUserId = 'u1';
+    this.renderLockUsers();
+    this.updatePinDots();
+    this.verifyPin();
+  }
+
   renderHeaderInfo() {
     const { restaurant, shift } = this.data;
     document.getElementById('headerRestaurantName').textContent = restaurant.name;
